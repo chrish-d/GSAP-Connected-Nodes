@@ -1,53 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Alumni Animation</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.2/gsap.min.js"></script>
-  </head>
 
-  <body>
-    <div class="alumni">
-      <svg id="svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <path class="path pathA" id="pathA" d="" />
-        <text
-          class="text textA"
-          width="100%"
-          color="darkslategray"
-          y="-8px"
-          x=""
-          text-anchor="middle"
-        >
-          <textPath alignment-baseline="top" xlink:href="#pathA">
-            MBA Program
-          </textPath>
-        </text>
+<head>
+  <meta charset="UTF-8" />
+  <title>Alumni Animation</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
 
-        <path class="path pathB" id="pathB" d="" />
-        <text
-          class="text textB"
-          width="100%"
-          color="darkslategray"
-          y="-8px"
-          x=""
-          text-anchor="middle"
-        >
-          <textPath alignment-baseline="top" xlink:href="#pathB">
-            London Campus
-          </textPath>
-        </text>
-
-        <path class="path pathC" id="pathC" d="" />
-      </svg>
-
-      <div id="boxes">
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-      </div>
+<body>
+  <div id="alumni">
+    <div id="boxes">
+      <div class="box"><img src="https://source.unsplash.com/random/500x300" alt="" /></div>
+      <div class="box"><img src="https://source.unsplash.com/random/500x300" alt="" /></div>
     </div>
+  </div>
 
-    <script src="./index.js" defer></script>
-  </body>
+  <script src="./index.js" defer></script>
+</body>
+
 </html>
