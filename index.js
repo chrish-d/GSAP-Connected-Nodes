@@ -47,8 +47,14 @@ function moveIt(image, bnd) {
   const vel = velocities.get(image);
 
   hitBox(image, bnd);
-  image.style.left = `${image.offsetLeft + vel.x}px`;
-  image.style.top = `${image.offsetTop + vel.y}px`;
+  image.style.left = `${
+    image.offsetLeft +
+    (vel.x === 0 ? vel.x + Math.floor(Math.random() * 2) : vel.x)
+  }px`;
+  image.style.top = `${
+    image.offsetTop +
+    (vel.y === 0 ? vel.y + Math.floor(Math.random() * 2) : vel.y)
+  }px`;
 
   setTimeout(() => {
     moveIt(image, bnd);
@@ -67,8 +73,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const random = randomLeftTop(container, image);
 
     velocities.set(image, {
-      x: 1 + Math.floor(Math.random() * 3 * (Math.random() < 0.5 ? -1 : 1)),
-      y: 1 + Math.floor(Math.random() * 2 * (Math.random() < 0.5 ? -1 : 1)),
+      x: 1 + Math.floor(Math.random() * 2 * (Math.random() < 0.5 ? -1 : 1)),
+      y: 1 + Math.floor(Math.random() * 1 * (Math.random() < 0.5 ? -1 : 1)),
     });
 
     image.style.left = `${random.left}px`;
