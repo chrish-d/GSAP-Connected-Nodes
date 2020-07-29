@@ -9,10 +9,22 @@ body {
   width: 100vw;
 }
 
-.boxes {
+#boxes {
   position: relative;
 }
 
 .box {
   position: absolute;
+}
+
+#paths {
+  position: absolute;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.path {
+  fill: none;
+  stroke: url(#my-cool-gradient) slategray;
+  stroke-width: 1;
 }

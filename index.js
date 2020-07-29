@@ -1,5 +1,4 @@
 const container = document.getElementById("alumni");
-
 const velocities = new Map();
 
 // ====
@@ -22,22 +21,18 @@ function hitBox(el, bnd) {
 
   if (el.offsetLeft <= 0 && vel.x < 0) {
     vel.x = -1 * vel.x;
-    console.log(`x`, vel.x);
   }
 
   if (el.offsetLeft + el.offsetWidth >= bnd.offsetWidth) {
     vel.x = -1 * vel.x;
-    console.log(`x`, vel.x);
   }
 
   if (el.offsetTop <= 0 && vel.y < 0) {
     vel.y = -1 * vel.y;
-    console.log(`y`, vel.y);
   }
 
   if (el.offsetTop + el.offsetHeight >= bnd.offsetHeight) {
     vel.y = -1 * vel.y;
-    console.log(`y`, vel.y);
   }
 }
 
@@ -57,13 +52,31 @@ function moveIt(image, bnd) {
 
 // ====
 
+function connectNodes(from, to, path) {
+  const start = from.getBoundingClientRect();
+  const end = to.getBoundingClientRect();
+
+  const startX = start.x;
+  const startY = start.y;
+  const endX = end.x;
+  const endY = end.y;
+
+  path.setAttribute("d", `M${startY} ${startX} L${endY} ${endX}`);
+
+  console.log('start', start);
+  console.log('end', end);
+}
+
+// ====
+
 document.addEventListener("DOMContentLoaded", function () {
   // 1. Find all of our images
   const images = document.getElementsByClassName("box");
-  let image = null;
 
-  // 2. Do some stuff to our images
-  for (image of images) {
+  // let count = 0;
+  for (const image of images) {
+    // 2. Position them at random, and animate their left/top
+    //    properties within a boundary
     const random = randomLeftTop(container, image);
 
     velocities.set(image, {
@@ -74,6 +87,22 @@ document.addEventListener("DOMContentLoaded", function () {
     image.style.left = `${random.left}px`;
     image.style.top = `${random.top}px`;
 
-    moveIt(image, container);
+    // moveIt(image, container);
+
+    const pathA = document.querySelector(".pathA");
+
+    if (image.dataset.connect) {
+      const connectTo = image.dataset.connect;
+      const fromNode = image;
+      const toNode = images.item(connectTo);
+
+      console.log(
+        `connecting ${fromNode.dataset.index} to ${toNode.dataset.index}`
+      );
+
+      console.log(toNode);
+
+      connectNodes(fromNode, toNode, pathA);
+    }
   }
 });
