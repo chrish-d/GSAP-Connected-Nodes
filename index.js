@@ -2,6 +2,8 @@ const container = document.getElementById("alumni");
 let velX = 3;
 let velY = 2;
 
+const velocities = new Map();
+
 // ====
 
 function randomLeftTop(el, img) {
@@ -18,6 +20,9 @@ function randomLeftTop(el, img) {
 // ====
 
 function hitBox(el, bnd) {
+  let velX = velocities.x;
+  let velY = velocities.y;
+
   if (el.offsetLeft <= 0 && velX < 0) {
     velX = -1 * velX;
     console.log(`velX`, velX);
@@ -41,13 +46,16 @@ function hitBox(el, bnd) {
 
 // ====
 
-function moveIt(el, bnd) {
-  hitBox(el, bnd);
-  el.style.left = `${el.offsetLeft + velX}px`;
-  el.style.top = `${el.offsetTop + velY}px`;
+function moveIt(image, bnd) {
+  const vel = velocities.get(image);
+  console.log(vel);
+
+  hitBox(image, bnd);
+  image.style.left = `${image.offsetLeft + vel.x}px`;
+  image.style.top = `${image.offsetTop + vel.y}px`;
 
   setTimeout(() => {
-    moveIt(el, bnd);
+    moveIt(image, bnd);
   }, 25);
 }
 
@@ -62,9 +70,16 @@ document.addEventListener("DOMContentLoaded", function () {
   for (image of images) {
     const random = randomLeftTop(container, image);
 
+    velocities.set(image, {
+      x: 1 + Math.floor(Math.random() * 3),
+      y: 1 + Math.floor(Math.random() * 2),
+    });
+
     image.style.left = `${random.left}px`;
     image.style.top = `${random.top}px`;
 
     moveIt(image, container);
   }
+
+  // console.log(velocities);
 });
