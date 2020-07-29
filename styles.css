@@ -9,6 +9,10 @@ body {
   width: 100vw;
 }
 
+.boxes {
+  position: relative;
+}
+
 .box {
   position: absolute;
 }
