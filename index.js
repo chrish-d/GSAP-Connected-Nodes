@@ -1,6 +1,4 @@
 const container = document.getElementById("alumni");
-let velX = 3;
-let velY = 2;
 
 const velocities = new Map();
 
@@ -20,27 +18,26 @@ function randomLeftTop(el, img) {
 // ====
 
 function hitBox(el, bnd) {
-  let velX = velocities.x;
-  let velY = velocities.y;
+  const vel = velocities.get(el);
 
-  if (el.offsetLeft <= 0 && velX < 0) {
-    velX = -1 * velX;
-    console.log(`velX`, velX);
+  if (el.offsetLeft <= 0 && vel.x < 0) {
+    vel.x = -1 * vel.x;
+    console.log(`x`, vel.x);
   }
 
   if (el.offsetLeft + el.offsetWidth >= bnd.offsetWidth) {
-    velX = -1 * velX;
-    console.log(`velX`, velX);
+    vel.x = -1 * vel.x;
+    console.log(`x`, vel.x);
   }
 
-  if (el.offsetTop <= 0 && velY < 0) {
-    velY = -1 * velY;
-    console.log(`velY`, velY);
+  if (el.offsetTop <= 0 && vel.y < 0) {
+    vel.y = -1 * vel.y;
+    console.log(`y`, vel.y);
   }
 
   if (el.offsetTop + el.offsetHeight >= bnd.offsetHeight) {
-    velY = -1 * velY;
-    console.log(`velY`, velY);
+    vel.y = -1 * vel.y;
+    console.log(`y`, vel.y);
   }
 }
 
@@ -48,7 +45,6 @@ function hitBox(el, bnd) {
 
 function moveIt(image, bnd) {
   const vel = velocities.get(image);
-  console.log(vel);
 
   hitBox(image, bnd);
   image.style.left = `${image.offsetLeft + vel.x}px`;
@@ -71,8 +67,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const random = randomLeftTop(container, image);
 
     velocities.set(image, {
-      x: 1 + Math.floor(Math.random() * 3),
-      y: 1 + Math.floor(Math.random() * 2),
+      x: 1 + Math.floor(Math.random() * 3 * (Math.random() < 0.5 ? -1 : 1)),
+      y: 1 + Math.floor(Math.random() * 2 * (Math.random() < 0.5 ? -1 : 1)),
     });
 
     image.style.left = `${random.left}px`;
@@ -80,6 +76,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
     moveIt(image, container);
   }
-
-  // console.log(velocities);
 });
