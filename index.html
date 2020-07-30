@@ -1,79 +1,51 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Alumni Animation</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <title>Alumni Animation</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
+  <body>
+    <div id="alumni">
+      <div id="boxes">
+        <div class="box" data-index="0" data-connect="2">
+          <img src="https://source.unsplash.com/random/500x300" alt="" />
+        </div>
 
-<body>
-  <div id="alumni">
-    <div id="boxes">
-      <div class="box" data-index="0" data-connect="2">
-        0<br />
-        <img src="https://source.unsplash.com/random/500x300" alt="" />
+        <div class="box" data-index="1" data-connect="4">
+          <img src="https://source.unsplash.com/random/200x300" alt="" />
+        </div>
+
+        <div class="box" data-index="2">
+          <img src="https://source.unsplash.com/random/400x300" alt="" />
+        </div>
+
+        <div class="box" data-index="3" data-connect="1">
+          <img src="https://source.unsplash.com/random/400x400" alt="" />
+        </div>
+
+        <div class="box" data-index="4" data-connect="3">
+          <img src="https://source.unsplash.com/random/400x200" alt="" />
+        </div>
+
+        <!-- <div class="box"><img src="https://source.unsplash.com/random/200x200" alt="" /></div>
+        <div class="box"><img src="https://source.unsplash.com/random/400x300" alt="" /></div>
+        <div class="box"><img src="https://source.unsplash.com/random/400x650" alt="" /></div>
+        <div class="box"><img src="https://source.unsplash.com/random/200x350" alt="" /></div>
+        <div class="box"><img src="https://source.unsplash.com/random/200x250" alt="" /></div>
+        <div class="box"><img src="https://source.unsplash.com/random/500x300" alt="" /></div>
+        <div class="box"><img src="https://source.unsplash.com/random/200x300" alt="" /></div>
+        <div class="box"><img src="https://source.unsplash.com/random/400x300" alt="" /></div>
+        <div class="box"><img src="https://source.unsplash.com/random/400x400" alt="" /></div>
+        <div class="box"><img src="https://source.unsplash.com/random/400x200" alt="" /></div>
+        <div class="box"><img src="https://source.unsplash.com/random/200x200" alt="" /></div>
+        <div class="box"><img src="https://source.unsplash.com/random/400x300" alt="" /></div> -->
       </div>
 
-      <div class="box" data-index="1">
-        1<br />
-        <img src="https://source.unsplash.com/random/200x300" alt="" />
-      </div>
-
-      <div class="box" data-index="2">
-        2<br />
-        <img src="https://source.unsplash.com/random/400x300" alt="" />
-      </div>
-
-      <div class="box" data-index="3">
-        3<br />
-        <img src="https://source.unsplash.com/random/400x400" alt="" />
-      </div>
-
-      <div class="box" data-index="4">
-        4<br />
-        <img src="https://source.unsplash.com/random/400x200" alt="" />
-      </div>
-
-      <!-- <div class="box"><img src="https://source.unsplash.com/random/200x200" alt="" /></div>
-      <div class="box"><img src="https://source.unsplash.com/random/400x300" alt="" /></div>
-      <div class="box"><img src="https://source.unsplash.com/random/400x650" alt="" /></div>
-      <div class="box"><img src="https://source.unsplash.com/random/200x350" alt="" /></div>
-      <div class="box"><img src="https://source.unsplash.com/random/200x250" alt="" /></div>
-      <div class="box"><img src="https://source.unsplash.com/random/500x300" alt="" /></div>
-      <div class="box"><img src="https://source.unsplash.com/random/200x300" alt="" /></div>
-      <div class="box"><img src="https://source.unsplash.com/random/400x300" alt="" /></div>
-      <div class="box"><img src="https://source.unsplash.com/random/400x400" alt="" /></div>
-      <div class="box"><img src="https://source.unsplash.com/random/400x200" alt="" /></div>
-      <div class="box"><img src="https://source.unsplash.com/random/200x200" alt="" /></div>
-      <div class="box"><img src="https://source.unsplash.com/random/400x300" alt="" /></div> -->
+      <svg id="paths"></svg>
     </div>
 
-    <svg id="paths" xmlns:xlink="http://www.w3.org/1999/xlink">
-      <linearGradient id="my-cool-gradient" x2="1" y2="1">
-        <stop offset="0%" stop-color="#FF0000" />
-        <stop offset="100%" stop-color="#0000FF" />
-      </linearGradient>
-
-      <path class="path pathA" id="pathA" d="" />
-      <!-- <text class="text textA" width="100%" color="darkslategray" y="-8px" x="" text-anchor="middle">
-        <textPath alignment-baseline="top" xlink:href="#pathA">
-          MBA Program
-        </textPath>
-      </text>
-
-      <path class="path pathB" id="pathB" d="" />
-      <text class="text textB" width="100%" color="darkslategray" y="-8px" x="" text-anchor="middle">
-        <textPath alignment-baseline="top" xlink:href="#pathB">
-          London Campus
-        </textPath>
-      </text>
-
-      <path class="path pathC" id="pathC" d="" /> -->
-    </svg>
-  </div>
-
-  <script src="index.js"></script>
-</body>
-
+    <script src="index.js"></script>
+  </body>
 </html>

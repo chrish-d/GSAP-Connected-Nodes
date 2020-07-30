@@ -1,4 +1,5 @@
 const container = document.getElementById("alumni");
+const pathContainer = document.getElementById("paths");
 const velocities = new Map();
 
 // ====
@@ -44,15 +45,48 @@ function moveIt(image, bnd) {
   hitBox(image, bnd);
   image.style.left = `${image.offsetLeft + vel.x}px`;
   image.style.top = `${image.offsetTop + vel.y}px`;
+  movePath({ image }, image.dataset.index);
 
-  setTimeout(() => {
+  requestAnimationFrame(() => {
     moveIt(image, bnd);
-  }, 25);
+  });
 }
 
 // ====
 
-function connectNodes(from, to, path) {
+function movePath({ image }, index) {
+  const lines = document.querySelectorAll(`line[data-from='${index}']`);
+
+  if (!(lines.length > 0)) {
+    return;
+  }
+
+  const fromX = image.offsetLeft;
+  const fromY = image.offsetTop;
+
+  for (const line of lines) {
+    const to = line.dataset.to;
+    const {
+      x: toX,
+      y: toY,
+      width: toWidth,
+      height: toHeight,
+    } = document
+      .querySelector(`.box[data-index='${to}'`)
+      .getBoundingClientRect();
+
+    line.setAttribute("x1", fromX + image.offsetWidth / 2);
+    line.setAttribute("y1", fromY + image.offsetHeight / 2);
+    line.setAttribute("x2", toX + toWidth / 2);
+    line.setAttribute("y2", toY + toHeight / 2);
+  }
+}
+
+// ====
+
+function connectNodes(from, to) {
+  const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+
   const start = from.getBoundingClientRect();
   const end = to.getBoundingClientRect();
 
@@ -61,10 +95,17 @@ function connectNodes(from, to, path) {
   const endX = end.x;
   const endY = end.y;
 
-  path.setAttribute("d", `M${startY} ${startX} L${endY} ${endX}`);
+  line.setAttribute("x1", startX);
+  line.setAttribute("y1", startY);
+  line.setAttribute("x2", endX);
+  line.setAttribute("y2", endY);
 
-  console.log('start', start);
-  console.log('end', end);
+  line.dataset.from = from.dataset.index;
+  line.dataset.to = to.dataset.index;
+
+  line.classList.add("path");
+
+  pathContainer.appendChild(line);
 }
 
 // ====
@@ -73,7 +114,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // 1. Find all of our images
   const images = document.getElementsByClassName("box");
 
-  // let count = 0;
   for (const image of images) {
     // 2. Position them at random, and animate their left/top
     //    properties within a boundary
@@ -87,9 +127,9 @@ document.addEventListener("DOMContentLoaded", function () {
     image.style.left = `${random.left}px`;
     image.style.top = `${random.top}px`;
 
-    // moveIt(image, container);
-
-    const pathA = document.querySelector(".pathA");
+    requestAnimationFrame(() => {
+      moveIt(image, container);
+    });
 
     if (image.dataset.connect) {
       const connectTo = image.dataset.connect;
@@ -97,12 +137,12 @@ document.addEventListener("DOMContentLoaded", function () {
       const toNode = images.item(connectTo);
 
       console.log(
-        `connecting ${fromNode.dataset.index} to ${toNode.dataset.index}`
+        `Connecting [${fromNode.dataset.index}] to [${toNode.dataset.index}]`
       );
 
-      console.log(toNode);
-
-      connectNodes(fromNode, toNode, pathA);
+      requestAnimationFrame(() => {
+        connectNodes(fromNode, toNode);
+      });
     }
   }
 });
