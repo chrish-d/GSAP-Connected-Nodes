@@ -110,39 +110,34 @@ function connectNodes(from, to) {
 
 // ====
 
-document.addEventListener("DOMContentLoaded", function () {
-  // 1. Find all of our images
-  const images = document.getElementsByClassName("box");
+const images = document.getElementsByClassName("box");
 
-  for (const image of images) {
-    // 2. Position them at random, and animate their left/top
-    //    properties within a boundary
-    const random = randomLeftTop(container, image);
+for (const image of images) {
+  const random = randomLeftTop(container, image);
 
-    velocities.set(image, {
-      x: 1 + Math.floor(Math.random() * 2 * (Math.random() < 0.5 ? -1 : 1)),
-      y: 1 + Math.floor(Math.random() * 1 * (Math.random() < 0.5 ? -1 : 1)),
-    });
+  velocities.set(image, {
+    x: 1 + Math.floor(Math.random() * 2 * (Math.random() < 0.5 ? -1 : 1)),
+    y: 1 + Math.floor(Math.random() * 1 * (Math.random() < 0.5 ? -1 : 1)),
+  });
 
-    image.style.left = `${random.left}px`;
-    image.style.top = `${random.top}px`;
+  image.style.left = `${random.left}px`;
+  image.style.top = `${random.top}px`;
+
+  requestAnimationFrame(() => {
+    moveIt(image, container);
+  });
+
+  if (image.dataset.connect) {
+    const connectTo = image.dataset.connect;
+    const fromNode = image;
+    const toNode = images.item(connectTo);
+
+    console.log(
+      `Connecting [${fromNode.dataset.index}] to [${toNode.dataset.index}]`
+    );
 
     requestAnimationFrame(() => {
-      moveIt(image, container);
+      connectNodes(fromNode, toNode);
     });
-
-    if (image.dataset.connect) {
-      const connectTo = image.dataset.connect;
-      const fromNode = image;
-      const toNode = images.item(connectTo);
-
-      console.log(
-        `Connecting [${fromNode.dataset.index}] to [${toNode.dataset.index}]`
-      );
-
-      requestAnimationFrame(() => {
-        connectNodes(fromNode, toNode);
-      });
-    }
   }
-});
+}
