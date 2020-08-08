@@ -5,10 +5,10 @@ const velocities = new Map();
 // ====
 
 function randomLeftTop(el, img) {
-  const containerWidth = el.offsetWidth / 2;
-  const containerHeight = el.offsetHeight / 2;
-  const imageWidth = img.offsetWidth / 2;
-  const imageHeight = img.offsetHeight / 2;
+  const containerWidth = el.offsetWidth / 4;
+  const containerHeight = el.offsetHeight / 4;
+  const imageWidth = img.offsetWidth / 4;
+  const imageHeight = img.offsetHeight / 4;
   return {
     left: Math.floor(Math.random() * (containerWidth - imageWidth)),
     top: Math.floor(Math.random() * (containerHeight - imageHeight)),
@@ -111,6 +111,14 @@ function connectNodes(from, to) {
 // ====
 
 const images = document.getElementsByClassName("box");
+const imageContainer = document.getElementById("boxes");
+let currentIndex = 1;
+
+imageContainer.addEventListener("mouseover", function (event) {
+  event.target.style.zIndex = ++currentIndex;
+  event.target.style.borderWidth = 0;
+  console.log(event.target.dataset);
+});
 
 for (const image of images) {
   const random = randomLeftTop(container, image);
