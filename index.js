@@ -117,7 +117,6 @@ let currentIndex = 1;
 imageContainer.addEventListener("mouseover", function (event) {
   event.target.style.zIndex = ++currentIndex;
   event.target.style.borderWidth = 0;
-  console.log(event.target.dataset);
 });
 
 for (const image of images) {
