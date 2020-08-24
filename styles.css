@@ -21,6 +21,7 @@ body {
 
 .box img {
   margin: 8px 0;
+  width: 100%;
 }
 
 .box__caption {
@@ -32,6 +33,23 @@ body {
 
 .box__caption--top {
   font-weight: bold;
+}
+
+.box__caption--bottom {
+  display: flex;
+}
+
+.box__caption--bottom .cell {
+  width: 75px;
+}
+
+.box__caption--bottom .cell:nth-of-type(1) {
+  margin-right: 4px;
+}
+
+.box__caption--bottom .cell:nth-of-type(2) {
+  margin-left: 4px;
+  text-align: right;
 }
 
 #paths {
